@@ -1,7 +1,7 @@
 # opx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/user/opx?style=flat-square)](https://github.com/user/opx)
+[![https://img.shields.io/github/go-mod/go-version/irsam33/opx?branch=main&logo=go]](https://github.com/irsam33/opx/blob/main/go.mod)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/user/opx/actions)
 
 **opx** is a simplified, zero-knowledge secret manager CLI inspired by 1Password CLI. Built in Go, it handles secrets securely with password-based and SRP (Secure Remote Password) authentication, encrypted local storage, and a secure memory model.
