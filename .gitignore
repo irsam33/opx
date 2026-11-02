@@ -1,0 +1,84 @@
+# opx - Git Ignore
+
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+opx
+op-clone
+
+# Certificates and Keys
+*.pfx
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.p7b
+*.p7c
+
+# Configuration and Data
+*.json
+!go.mod
+!go.sum
+config/
+.opx/
+.op-clone/
+
+# Session and Secret Files
+*.session
+*.enc
+*.secret
+*.token
+
+# Build artifacts
+/dist/
+/build/
+/bin/
+*.o
+*.a
+
+# IDE and Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+*.test
+*.out
+coverage.txt
+*.prof
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+*.cache
+
+# Go
+vendor/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+backup.json
+events_backup.json
+*.backup
+
+# Debug files
+*.dmp
+*.pdb
+
+# Environment
+.env
+.env.local
+.env.*.local
