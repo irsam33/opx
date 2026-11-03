@@ -1,0 +1,45 @@
+# Code owners for opx
+# Format: path ...@username
+
+# Root configuration
+/  @irsam33
+
+# Core CLI commands
+cmd/op/*  @irsam33
+
+# Authentication & Security
+internal/auth/*  @irsam33
+internal/srp/*  @irsam33
+internal/srpauth/*  @irsam33
+internal/crypto/*  @irsam33
+internal/securemem/*  @irsam33
+
+# Data & Storage
+internal/storage/*  @irsam33
+internal/vault/*  @irsam33
+internal/clipboard/*  @irsam33
+
+# Networking & Sync
+internal/cloudsync/*  @irsam33
+internal/connect/*  @irsam33
+internal/desktopapp/*  @irsam33
+
+# Events & Webhooks
+internal/events/*  @irsam33
+
+# Platform-specific
+internal/fileacl/*  @irsam33
+
+# Utilities
+internal/config/*  @irsam33
+internal/logger/*  @irsam33
+internal/retry/*  @irsam33
+internal/graceful/*  @irsam33
+internal/ctxutil/*  @irsam33
+internal/interfaces/*  @irsam33
+internal/apperror/*  @irsam33
+internal/ux/*  @irsam33
+
+# Dependencies & tooling
+internal/app/*  @irsam33
+internal/interfaces/*  @irsam33
