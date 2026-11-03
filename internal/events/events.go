@@ -126,7 +126,11 @@ func (es *EventStore) Load() error {
 
 // Query queries events with filters
 func (es *EventStore) Query(eventType EventType, actor string, since time.Time, limit int) []Event {
-	return es.FilterEvents([]EventType{eventType}, []string{actor}, since, time.Time{})
+	var actors []string
+	if actor != "" {
+		actors = []string{actor}
+	}
+	return es.FilterEvents([]EventType{eventType}, actors, since, time.Time{})
 }
 
 // FilterEvents filters events by multiple criteria

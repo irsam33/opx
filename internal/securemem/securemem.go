@@ -82,6 +82,10 @@ func (sb *SecureBytes) Clone() *SecureBytes {
 
 // Compare compares two SecureBytes in constant time
 func (sb *SecureBytes) Compare(other *SecureBytes) bool {
+	if sb == other {
+		return true
+	}
+
 	sb.mu.Lock()
 	defer sb.mu.Unlock()
 	other.mu.Lock()

@@ -39,9 +39,18 @@ func (a *Auth) SignIn(password string) error {
 	// Derive master key from password
 	masterKey := crypto.DeriveKey(password, salt)
 
-	// Save salt and master key to config (DEMO ONLY - not secure!)
-	configPath := filepath.Join(storage.DefaultPath(), "opx_config.json")
-	os.MkdirAll(storage.DefaultPath(), 0700)
+	// Determine storage path
+	basePath := storage.DefaultPath()
+	if a.Storage != nil && a.Storage.BasePath != "" {
+		basePath = a.Storage.BasePath
+	}
+	if a.Storage == nil {
+		a.Storage = &storage.Storage{BasePath: basePath}
+	}
+
+	// Save salt and master key to config
+	configPath := filepath.Join(basePath, "opx_config.json")
+	os.MkdirAll(basePath, 0700)
 	config := map[string]interface{}{
 		"salt":       crypto.EncodeBase64(salt),
 		"email":      a.Account,
@@ -56,7 +65,7 @@ func (a *Auth) SignIn(password string) error {
 	// Update storage with master key (stored as SecureBytes)
 	a.MasterKey = securemem.NewSecureBytes(masterKey)
 	a.Storage.MasterKey = a.MasterKey.Bytes()
-	a.Storage.BasePath = storage.DefaultPath()
+	a.Storage.BasePath = basePath
 
 	// Zero the password
 	for i := range password {
@@ -68,7 +77,15 @@ func (a *Auth) SignIn(password string) error {
 
 // LoadConfig loads configuration from disk
 func (a *Auth) LoadConfig() error {
-	configPath := filepath.Join(storage.DefaultPath(), "opx_config.json")
+	basePath := storage.DefaultPath()
+	if a.Storage != nil && a.Storage.BasePath != "" {
+		basePath = a.Storage.BasePath
+	}
+	if a.Storage == nil {
+		a.Storage = &storage.Storage{BasePath: basePath}
+	}
+
+	configPath := filepath.Join(basePath, "opx_config.json")
 	data, err := os.ReadFile(configPath)
 	if err != nil {
 		return err
@@ -90,7 +107,7 @@ func (a *Auth) LoadConfig() error {
 		}
 		a.MasterKey = securemem.NewSecureBytes(mk)
 		a.Storage.MasterKey = a.MasterKey.Bytes()
-		a.Storage.BasePath = storage.DefaultPath()
+		a.Storage.BasePath = basePath
 	}
 
 	return nil
@@ -114,9 +131,15 @@ func (a *Auth) SignOut() error {
 		a.MasterKey.Destroy()
 		a.MasterKey = nil
 	}
-	a.Storage.MasterKey = nil
+	if a.Storage != nil {
+		a.Storage.MasterKey = nil
+	}
 	// Remove config file
-	configPath := filepath.Join(storage.DefaultPath(), "opx_config.json")
+	basePath := storage.DefaultPath()
+	if a.Storage != nil && a.Storage.BasePath != "" {
+		basePath = a.Storage.BasePath
+	}
+	configPath := filepath.Join(basePath, "opx_config.json")
 	os.Remove(configPath)
 	return nil
 }
