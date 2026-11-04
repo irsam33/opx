@@ -42,7 +42,7 @@ Prebuilt binaries are available on the [releases page](https://github.com/user/o
 Requires [Go 1.22+](https://go.dev/dl/):
 
 ```bash
-git clone https://github.com/user/opx
+git clone https://github.com/irsam33/opx
 cd opx
 go build -buildvcs=false -o opx.exe ./cmd/op
 ```
